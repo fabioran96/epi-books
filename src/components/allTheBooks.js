@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React from 'react';
 import { Card, Container, Row, Col, ButtonGroup, Button } from 'react-bootstrap';
 import scifiBooks from '../data/scifi.json';
 import fantasyBooks from '../data/fantasy.json';
@@ -6,36 +6,46 @@ import horrorBooks from '../data/horror.json';
 import romanceBooks from '../data/romance.json';
 import historyBooks from '../data/history.json';
 
-const AllTheBooks = () => {
-    const [genre, setGenre] = useState('scifi');
-  
-    const getBooksByGenre = (genre) => {
-      switch (genre) {
-        case 'scifi':
-          return scifiBooks;
-        case 'fantasy':
-          return fantasyBooks;
-        case 'horror':
-          return horrorBooks;
-        case 'romance':
-          return romanceBooks;
-        case 'history':
-          return historyBooks;
-        default:
-          return [];
-      }
+class AllTheBooks extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      genre: 'scifi'
     };
-  
-    const books = getBooksByGenre(genre);
-  
+  }
+
+  handleSelectGenre = (genre) => {
+    this.setState({ genre });
+  };
+
+  getBooksByGenre = (genre) => {
+    switch (genre) {
+      case 'scifi':
+        return scifiBooks;
+      case 'fantasy':
+        return fantasyBooks;
+      case 'horror':
+        return horrorBooks;
+      case 'romance':
+        return romanceBooks;
+      case 'history':
+        return historyBooks;
+      default:
+        return [];
+    }
+  };
+
+  render() {
+    const books = this.getBooksByGenre(this.state.genre);
+
     return (
       <Container>
         <ButtonGroup className="mt-4">
-          <Button onClick={() => setGenre('scifi')}>Sci-Fi</Button>
-          <Button onClick={() => setGenre('fantasy')}>Fantasy</Button>
-          <Button onClick={() => setGenre('horror')}>Horror</Button>
-          <Button onClick={() => setGenre('romance')}>Romance</Button>
-          <Button onClick={() => setGenre('history')}>History</Button>
+          <Button onClick={() => this.handleSelectGenre('scifi')}>Sci-Fi</Button>
+          <Button onClick={() => this.handleSelectGenre('fantasy')}>Fantasy</Button>
+          <Button onClick={() => this.handleSelectGenre('horror')}>Horror</Button>
+          <Button onClick={() => this.handleSelectGenre('romance')}>Romance</Button>
+          <Button onClick={() => this.handleSelectGenre('history')}>History</Button>
         </ButtonGroup>
         <Row className="mt-4">
           {books.map(book => (
@@ -52,8 +62,9 @@ const AllTheBooks = () => {
         </Row>
       </Container>
     );
-  };
-  
-  export default AllTheBooks;
-  
+  }
+}
+
+export default AllTheBooks;
+
 
