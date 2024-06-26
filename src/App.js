@@ -3,21 +3,23 @@ import './App.css';
 import MyNav from './components/myNav';
 import MyFooter from './components/myFooter';
 import Welcome from './components/welcome';
-import AllTheBooks from './components/allTheBooks'
-import { Container } from 'react-bootstrap'
+import BookList from './components/booklist';
+import scifiBooks from './data/scifi.json';
+import { Container } from 'react-bootstrap';
 
 function App () {
   return (
     <>
-    <MyNav />
-    <Container>
-      <Welcome />
-      <AllTheBooks />
-    </Container>
-    <MyFooter />
-  </>
-)
+      <MyNav />
+      <Container>
+        <Welcome />
+        <BookList books={scifiBooks} />
+      </Container>
+      <MyFooter />
+    </>
+  );
 }
 
-export default App
+export default App;
+
 
