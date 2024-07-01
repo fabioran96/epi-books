@@ -32,7 +32,7 @@ class BookList extends Component {
         <Row>
           {filteredBooks.map(book => (
             <Col sm={12} md={6} lg={4} key={book.asin}>
-              <SingleBook book={book} />
+              <SingleBook book={book} onBookSelect={this.props.onBookSelect}  />
             </Col>
           ))}
         </Row>
